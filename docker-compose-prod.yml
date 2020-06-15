@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+  web:
+    build:
+      context: ./services/web
+      dockerfile: Dockerfile.prod
+    command: gunicorn --bind 0.0.0.0:5000 run:app
+    volumes:
+      - ./services/web/:/home/app/web
+    expose:
+      - 5000
+  nginx:
+    build: ./services/nginx
+    ports:
+      - 80:80
+    depends_on:
+      - web 
