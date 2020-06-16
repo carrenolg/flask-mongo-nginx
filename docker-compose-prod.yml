@@ -16,3 +16,10 @@ services:
       - 80:80
     depends_on:
       - web 
+  db:
+    image: mongo
+    restart: always
+    volumes: 
+      - ./services/db/data:/data/db
+    expose: 
+      - 27017
